@@ -1,51 +1,28 @@
 import React, { Component } from "react";
+import { Link, Route } from "react-router-dom";
 import "./App.css";
+import routesConfig from "./routesConfig";
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: "Glaucio",
-    };
-    this.changeState = this.changeState.bind(this)
-    this.resetState = this.resetState.bind(this)
-  }
-
-  changeState() {
-    this.setState({
-      name: "Glaucio Dias",
-    });
-  }
-
-  resetState() {
-    this.setState({
-      name: "Glaucio",
-    });
-  }
-
   render() {
     return (
-      <div className="App">
-        <div>{this.state.name}</div>
-        <button onClick={this.changeState}>Mudar estado</button>
-        <button onClick={this.resetState}>Reset estado</button>
+      <div>
+        <div className="App">
+          <Link to="/">Home</Link>
+          <Link to="/user">User</Link>
+        </div>
+        {routesConfig.map((value, key) => {
+          return (
+            <Route
+              key={key}
+              path={value.path}
+              component={value.component}
+              exact={value.exact}
+            ></Route>
+          );
+        })}
       </div>
     );
   }
 }
-// function App() {
-
-//   constructor(props) {
-//     super(props)
-//     this.state = {
-//       name: 'Glaucio'
-//     }
-//   }
-
-//   return (
-//     <div className="App">
-
-//     </div>
-//   );
-// }
 
 export default App;
